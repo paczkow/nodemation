@@ -1,15 +1,17 @@
-import OpenAI from "openai";
+import { Readable } from "node:stream";
+import OpenAI, { toFile } from "openai";
+
 
 const openai = new OpenAI({
 	organization: process.env.OPENAI_ORG,
 	apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function transcribe(buffer) {
-	const file = await OpenAI.toFile(buffer, "audio.mp3");
+export async function transcribe(buffer, extension) {
+	const audio = await toFile(buffer, `audio.${extension}`);
 
 	return await openai.audio.transcriptions.create({
-		file,
+		file: audio,
 		model: "whisper-1",
 	});
 }

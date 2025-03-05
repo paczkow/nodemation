@@ -1,3 +1,4 @@
+import path from "node:path"
 import express from "express";
 import multer from "multer";
 import { transcribe } from "./src/sst.mjs";
@@ -33,7 +34,8 @@ app.post(
 		}
 
 		try {
-			const { text } = await transcribe(req.file.buffer);
+			const extension = path.extname(req.file.originalname);
+			const { text } = await transcribe(req.file.buffer, extension);
 			const { title, description } = await createTask(text);
 
 			res.json({
