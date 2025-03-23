@@ -1,10 +1,5 @@
-# Automations
+# nodemation (n8n)
 
-## Overview
-This is a Node.js application that provides AI-powered task automation.
-
-## Features
-- Automatic task title generation from transcribed text using LLM
-
+Configuration of self-hosting n8n instance to create automations. 
 
 
